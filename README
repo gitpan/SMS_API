@@ -1,0 +1,89 @@
+SMS/API version 2.01
+===================
+1)INSTALLATION
+2)Synopsis (example)
+3)Description
+4)Author
+5)Licence
+
+INSTALLATION
+
+To install this module type the following:
+
+   perl Makefile.PL
+   make
+   make test
+   make install
+
+For any help visit http://www.goyali.com
+
+
+SMS::API - A module to send SMS using the goyali.com servers
+
+SYNOPSIS
+
+  use SMS::API;
+  $message_id=sms_send("$user","$password","$to","$message","$from");
+
+  $sent_status=sms_status("$user","$password","$message_id");
+
+DESCRIPTION
+
+This is a module for sending the SMS by integrating with the servers of http://www.goyali.com.
+
+For a solution of directly sending the SMS via internet or through SMS visit http://www.goyali.com
+
+In case of any problem whatsoever please do not hesitate to contact http://www.goyali.com/contact.htm .We have an excellent team of customer support and you will be responded in hours.
+
+NOTE: You first need to register at http://www.goyali.com/contact.htm (visit the URL and request a sms gateway account. You will given one within hours)for using this module. On registering you will be given a user id and password and some free test credits. You can use the credits to send the SMS.
+
+NOTE: We are very serious about this module and any errors performed are requested to be reported at http://www.goyali.com/contact.htm
+
+At the moment these methods are implemented:
+
+I) sms_send("$user","$password","$to","$message","$from")
+
+This method send an SMS. The parameters sent are :
+$user , $password = The user name and Password given to you at the time of signup.
+$message= The message you wish to send.
+$from= If your account supports dynamic sender id then this parameter will tell what will be the from id as seen by the mobile.
+
+On successful sending the SMS the function returns the unique message id which can be used to track the delivery status of the SMS otherwise it will return 0.
+
+II) sms_status("$user","$password","$message_id")
+
+This method gives the status of the SMS ie. whether it has been sent or not. The parameters sent are :
+$user , $password = The user name and Password given to you at the time of signup.
+$message_id= The message id whose status you want to determine.
+
+The function returns the status of message ie. 1 if message has been received by the mobile , 0 if it has not been delivered yet ie. Failure or Retrying.
+
+
+EXPORT
+
+send_sms_email , sms_send , sms_status .
+
+
+AUTHOR
+
+Abhishek jain<goyali@cpan.org>
+
+
+SEE ALSO
+
+http://www.goyali.com
+
+
+DEPENDENCIES
+
+This module requires these other modules and libraries:
+
+For any help visit http://www.goyali.com
+
+
+COPYRIGHT AND LICENCE
+
+Copyright (C) 2004 Goyali.com
+
+This library is free software you can redistribute it but can not modify it . For modifying permisions request a free licence at  http://www.goyali.com/contact.htm
+
