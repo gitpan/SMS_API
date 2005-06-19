@@ -18,72 +18,73 @@ To install this module type the following:
 For any help visit http://www.goyali.com
 
 
-SMS::API - A module to send SMS using the goyali.com servers
+SMS::API - A module to send SMS using the sms1.in servers
 
 SYNOPSIS
 
+  use XML::Simple;
   use SMS::API;
-  $message_id=sms_send("$user","$password","$to","$message","$from");
+                        #To send SMS Replace with username and password and message text. You can get User name by visiting http://www.sms1.in
+    my $sms = SMS::API->new(
+    'userName' => "$user_name",
+    'password' => "$password",
+    'to' =>  "$to",      #Substitute by a valid International format mobile number to whom you wanted to send SMS. eg. 919811111111
+    '$from' => "$from",  #Optional
+    'messageText'=>"$message_text", #Max 160 characters Message.
+      );
+$send = $sms->send;
 
-  $sent_status=sms_status("$user","$password","$message_id");
+                  #To check the status of the messages sent;
+    my $sms = SMS::API->new(
+    'userName' => $userName,
+    'password' => $password,
+    'messageId'=>$messageId,
+      );
+    $status = $sms->status; #$status will be sent to 1 if message hacs been received
+
+
 
 DESCRIPTION
 
-This is a module for sending the SMS by integrating with the servers of http://www.goyali.com.
+This is a module for sending the SMS by integrating with the servers of http://www.sms1.in
 
-For a solution of directly sending the SMS via internet or through SMS visit http://www.goyali.com
+For a solution of directly sending the SMS via internet or through SMS visit http://www.sms1.in
+In case of any problem whatsoever please do not hesitate to contact http://www.sms1.in/contact.html .We have an excellent team of customer support and you will be responded in hours.
 
-In case of any problem whatsoever please do not hesitate to contact http://www.goyali.com/contact.htm .We have an excellent team of customer support and you will be responded in hours.
+NOTE: You first need to register at http://www.sms1.in/signup.html (visit the URL and request a sms gateway account. You will given one within seconds and it is free)for using this module. On registering you will be given a user id and password and some free test credits. You can use the credits to send the SMS.
 
-NOTE: You first need to register at http://www.goyali.com/contact.htm (visit the URL and request a sms gateway account. You will given one within hours)for using this module. On registering you will be given a user id and password and some free test credits. You can use the credits to send the SMS.
+NOTE: We are very serious about this module and any errors performed are requested to be reported at http://www.sms1.in/contact.html
 
-NOTE: We are very serious about this module and any errors performed are requested to be reported at http://www.goyali.com/contact.htm
+NOTE: This module has a dependency over XML::Simple and that must be installed to properly send the SMSes . It can be optained easily from cpan.
 
 At the moment these methods are implemented:
 
-I) sms_send("$user","$password","$to","$message","$from")
+new
+A constructor
+
+send
 
 This method send an SMS. The parameters sent are :
-$user , $password = The user name and Password given to you at the time of signup.
-$message= The message you wish to send.
-$from= If your account supports dynamic sender id then this parameter will tell what will be the from id as seen by the mobile.
+userName , password = The user name and Password given to you at the time of signup.
+messageText = The message you wish to send.
+from = If your account supports dynamic sender id then this parameter will tell what will be the from id as seen by the mobile.
+to = The mobile number whom you wish to send SMS to in international  format eg. 919811111111 .
 
 On successful sending the SMS the function returns the unique message id which can be used to track the delivery status of the SMS otherwise it will return 0.
 
-II) sms_status("$user","$password","$message_id")
+status
 
 This method gives the status of the SMS ie. whether it has been sent or not. The parameters sent are :
-$user , $password = The user name and Password given to you at the time of signup.
-$message_id= The message id whose status you want to determine.
 
 The function returns the status of message ie. 1 if message has been received by the mobile , 0 if it has not been delivered yet ie. Failure or Retrying.
 
-
-EXPORT
-
-send_sms_email , sms_send , sms_status .
-
+You can also visit the SMS1.in to check the status by logging on to your account.
 
 AUTHOR
 
-Abhishek jain<goyali@cpan.org>
-
+<Abhishek jain>
+goyali at cpan.org
 
 SEE ALSO
 
-http://www.goyali.com
-
-
-DEPENDENCIES
-
-This module requires these other modules and libraries:
-
-For any help visit http://www.goyali.com
-
-
-COPYRIGHT AND LICENCE
-
-Copyright (C) 2004 Goyali.com
-
-This library is free software you can redistribute it but can not modify it . For modifying permisions request a free licence at  http://www.goyali.com/contact.htm
-
+http://www.sms1.in
