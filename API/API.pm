@@ -33,7 +33,7 @@ our %EXPORT_TAGS = ( 'all' => [ qw(
 our @EXPORT_OK = ( @{ $EXPORT_TAGS{'all'} } );
 
 our @EXPORT = qw();
-our $VERSION = '3.01';
+our $VERSION = '3.01.1';
 
 
 # Preloaded methods go here.
@@ -152,17 +152,18 @@ __END__
 SMS::API - A module to send SMS using the sms1.in servers
 
 =head1 SYNOPSIS
+
   use XML::Simple;
   use SMS::API;
                         #To send SMS Replace with username and password and message text. You can get User name by visiting http://www.sms1.in
-    my $sms = SMS::API->new(
+  my $sms = SMS::API->new(
     'userName' => "$user_name",
     'password' => "$password",
     'to' =>  "$to",      #Substitute by a valid International format mobile number to whom you wanted to send SMS. eg. 919811111111
     '$from' => "$from",  #Optional
     'messageText'=>"$message_text", #Max 160 characters Message.
       );
-$send = $sms->send;
+  my $send = $sms->send;
 
                   #To check the status of the messages sent;
     my $sms = SMS::API->new(
@@ -170,7 +171,7 @@ $send = $sms->send;
     'password' => $password,
     'messageId'=>$messageId,
       );
-    $status = $sms->status; #$status will be sent to 1 if message hacs been received
+  my $status = $sms->status; #$status will be sent to 1 if message hacs been received
 
 
 
@@ -192,6 +193,7 @@ At the moment these methods are implemented:
 =over 4
 
 =item C<new>
+
 A constructor
 
 =item C<send>
