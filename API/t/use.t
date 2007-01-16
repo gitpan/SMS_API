@@ -4,7 +4,9 @@ use Test;
 BEGIN { plan tests => 1}
 
 use SMS::API;
-use XML::Simple;
+use HTTP::Request::Common;
+use LWP::UserAgent;
+
 ok(1);
 exit;
 

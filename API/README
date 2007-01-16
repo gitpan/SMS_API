@@ -22,26 +22,20 @@ SMS::API - A module to send SMS using the sms1.in servers
 
 SYNOPSIS
 
-  use XML::Simple;
+ use HTTP::Request::Common;
+  use LWP::UserAgent;
   use SMS::API;
-                        #To send SMS Replace with username and password and message text. You can get User name by visiting http://www.sms1.in
-    my $sms = SMS::API->new(
-    'userName' => "$user_name",
+my $email = 'test@webbee.biz';
+my $password= 'demo';
+my $to = '919911111111'; #Substitute by a valid International format mobile number to whom you wanted to send SMS. eg. 919811111111 where 91 is indian isd code.
+$message= 'Wow ! This site rocks.';
+  my $sms = SMS::API->new(
+    'email' => "$email",
     'password' => "$password",
-    'to' =>  "$to",      #Substitute by a valid International format mobile number to whom you wanted to send SMS. eg. 919811111111
-    '$from' => "$from",  #Optional
-    'messageText'=>"$message_text", #Max 160 characters Message.
+    'to' =>  "$to",
+    'message'=>"$message", #Max 160 characters Message.
       );
-$send = $sms->send;
-
-                  #To check the status of the messages sent;
-    my $sms = SMS::API->new(
-    'userName' => $userName,
-    'password' => $password,
-    'messageId'=>$messageId,
-      );
-    $status = $sms->status; #$status will be sent to 1 if message hacs been received
-
+print $sms->send;
 
 
 DESCRIPTION
@@ -49,36 +43,38 @@ DESCRIPTION
 This is a module for sending the SMS by integrating with the servers of http://www.sms1.in
 
 For a solution of directly sending the SMS via internet or through SMS visit http://www.sms1.in
-In case of any problem whatsoever please do not hesitate to contact http://www.sms1.in/contact.html .We have an excellent team of customer support and you will be responded in hours.
+In case of any problem whatsoever please do not hesitate to contact http://www.sms1.in/ .We have an excellent team of customer support and you will be responded in hours.
 
-NOTE: You first need to register at http://www.sms1.in/signup.html (visit the URL and request a sms gateway account. You will given one within seconds and it is free)for using this module. On registering you will be given a user id and password and some free test credits. You can use the credits to send the SMS.
+NOTE: You first need to register at http://www.sms1.in/ (visit the URL and request a sms gateway account. You will given one within seconds and it is free)for using this module. On registering you will be given a user id and password and some free test credits. You can use the credits to send the SMS.
 
-NOTE: We are very serious about this module and any errors performed are requested to be reported at http://www.sms1.in/contact.html
+NOTE: We are very serious about this module and any errors performed are requested to be reported at http://www.sms1.in/
 
-NOTE: This module has a dependency over XML::Simple and that must be installed to properly send the SMSes . It can be optained easily from cpan.
+NOTE: This module has a dependency over LWP::UserAgent and HTTP::Request::Common and that must be installed to properly send the SMSes . It can be obtained easily from cpan.
 
 At the moment these methods are implemented:
 
 new
+
 A constructor
 
-send
-
-This method send an SMS. The parameters sent are :
-userName , password = The user name and Password given to you at the time of signup.
-messageText = The message you wish to send.
+The parameters sent are :
+email , password = The user name and Password given to you at the time of signup.
+message = The message you wish to send.
 from = If your account supports dynamic sender id then this parameter will tell what will be the from id as seen by the mobile.
 to = The mobile number whom you wish to send SMS to in international  format eg. 919811111111 .
 
-On successful sending the SMS the function returns the unique message id which can be used to track the delivery status of the SMS otherwise it will return 0.
+send
 
-status
-
-This method gives the status of the SMS ie. whether it has been sent or not. The parameters sent are :
-
-The function returns the status of message ie. 1 if message has been received by the mobile , 0 if it has not been delivered yet ie. Failure or Retrying.
+This method send an SMS.
+On successful sending the SMS the function returns the error text / success text.
 
 You can also visit the SMS1.in to check the status by logging on to your account.
+
+And do not forget to inform the author of any bugs you encountered or the features you want into that.
+
+NOTE:
+This module was initially made for the indian audience and so was the site http://sms1.in , international customers were also brought in later but you need to place a special request for that.
+As alread mentioned sms1.in prouds to have a good support and you will be replied faster than expected.
 
 AUTHOR
 
@@ -88,3 +84,5 @@ goyali at cpan.org
 SEE ALSO
 
 http://www.sms1.in
+
+
